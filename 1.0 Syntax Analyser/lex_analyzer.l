@@ -74,13 +74,7 @@ float   ({digit}+\.{digit}*)|(\.{digit}+)
                 lines += yyleng;     /* increase line count for each \n */
             }
 
-{id}       {
-                symbol_info *s = new symbol_info((string)yytext,"ID");
-                yylval = (YYSTYPE)s;
-                loglist="Line no "+to_string(lines)+": Token <ID> Lexeme "+yytext+" found"+"\n"+"\n";
-			    outlog<<loglist;
-                return ID;
-            }
+
 
 if          {   
                 symbol_info *s = new symbol_info((string)yytext,"IF");
@@ -225,6 +219,46 @@ printf      {
 			    outlog<<loglist;
                 return PRINTF; }
 
+{float} {
+    symbol_info *s=new symbol_info((string)yytext,"CONST_FLOAT");
+    yylval=s;
+
+    loglist="Line no "+to_string(lines)+": Token <CONST_FLOAT> Lexeme "+yytext+" found"+"\n"+"\n";
+	outlog<<loglist;
+    return CONST_FLOAT;
+}
+
+{int} {
+    symbol_info *s=new symbol_info((string)yytext,"CONST_INT");
+    yylval=s;
+
+    loglist="Line no "+to_string(lines)+": Token <CONST_INT> Lexeme "+yytext+" found"+"\n"+"\n";
+	outlog<<loglist;
+    return CONST_INT;
+}
+
+
+
+{id}       {
+                symbol_info *s = new symbol_info((string)yytext,"ID");
+                yylval = (YYSTYPE)s;
+                loglist="Line no "+to_string(lines)+": Token <ID> Lexeme "+yytext+" found"+"\n"+"\n";
+			    outlog<<loglist;
+                return ID;
+            }
+
+
+
+"++"|"--"   {
+                symbol_info *s = new symbol_info((string)yytext,"INCOP");
+                yylval = (YYSTYPE)s;
+
+                loglist="Line no "+to_string(lines)+": Token <INCOP> Lexeme "+yytext+" found"+"\n"+"\n";
+                outlog<<loglist;
+
+                return INCOP;
+            }
+
 "+"|"-"	    {
                 symbol_info *s = new symbol_info((string)yytext,"ADDOP");
                 yylval = (YYSTYPE)s;
@@ -233,12 +267,7 @@ printf      {
                 return ADDOP;
 		    }
 
-","        { 
-                symbol_info *s = new symbol_info((string)yytext,"COMMA");
-                yylval = (YYSTYPE)s;
-                loglist="Line no "+to_string(lines)+": Token <COMMA> Lexeme "+yytext+" found"+"\n"+"\n";
-			    outlog<<loglist;               
-                return COMMA; }
+
 
 "*"|"/"|"%"   {
                 symbol_info *s = new symbol_info((string)yytext,"MULOP");
@@ -250,15 +279,7 @@ printf      {
                 return MULOP;
              }
 
-"++"|"--"   {
-                symbol_info *s = new symbol_info((string)yytext,"INCOP");
-                yylval = (YYSTYPE)s;
 
-                loglist="Line no "+to_string(lines)+": Token <INCOP> Lexeme "+yytext+" found"+"\n"+"\n";
-                outlog<<loglist;
-
-                return INCOP;
-            }
 
 "<="|">="|"=="|"!="|"<"|">"   {
                 symbol_info *s = new symbol_info((string)yytext,"RELOP");
@@ -388,6 +409,10 @@ printf      {
                 outlog << loglist;
 
                 return SEMICOLON;
+}
+
+. {
+   cout<<"Unknown character "<<yytext<<endl;
 }
 
 %%
