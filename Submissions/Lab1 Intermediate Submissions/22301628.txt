@@ -1,0 +1,9 @@
+1. Using Flex lexical analyzer, we wrote regex rules that read raw source code and split it into tokens like:
+
+keywords (if, while, return, etc)
+identifiers
+numbers (int / float)
+operators and punctuation
+
+2. Tried to maintain proper ordering (id after all the keywords and all)
+3. Figured out potential naming issues.
