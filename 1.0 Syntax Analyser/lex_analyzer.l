@@ -212,12 +212,12 @@ goto        {
                 return GOTO; }
 
 printf      {   
-                symbol_info *s = new symbol_info((string)yytext,"PRINTF");
+                symbol_info *s = new symbol_info((string)yytext,"PRINTLN");
                 yylval = (YYSTYPE)s;
 
-                loglist="Line no "+to_string(lines)+": Token <PRINTF> Lexeme "+yytext+" found"+"\n"+"\n";
+                loglist="Line no "+to_string(lines)+": Token <PRINTLN> Lexeme "+yytext+" found"+"\n"+"\n";
 			    outlog<<loglist;
-                return PRINTF; }
+                return PRINTLN; }
 
 {float} {
     symbol_info *s=new symbol_info((string)yytext,"CONST_FLOAT");
@@ -311,104 +311,64 @@ printf      {
                 return LOGICOP;
             }
 
-"!"         {
-                symbol_info *s = new symbol_info((string)yytext, "NOT");
-                yylval = (YYSTYPE)s;
-
-                loglist="Line no "+to_string(lines)+": Token <NOT> Lexeme "+yytext+" found"+"\n"+"\n";
-                outlog<<loglist;
-
-                return NOT;                
+"!" {
+    loglist="Line no "+to_string(lines)+": Token <NOT> Lexeme ! found\n\n";
+    outlog<<loglist;
+    return NOT;
 }
 
-"("         {
-                symbol_info *s = new symbol_info((string)yytext, "LPAREN");
-                yylval = (YYSTYPE)s;
-
-                loglist = "Line no " + to_string(lines) + ": Token <LPAREN> Lexeme " + yytext + " found" + "\n" + "\n";
-                outlog << loglist;
-
-                return LPAREN;
+"(" {
+    loglist="Line no "+to_string(lines)+": Token <LPAREN> Lexeme ( found\n\n";
+    outlog<<loglist;
+    return LPAREN;
 }
 
-")"         {
-                symbol_info *s = new symbol_info((string)yytext, "RPAREN");
-                yylval = (YYSTYPE)s;
-
-                loglist = "Line no " + to_string(lines) + ": Token <RPAREN> Lexeme " + yytext + " found" + "\n" + "\n";
-                outlog << loglist;
-
-                return RPAREN;
+")" {
+    loglist="Line no "+to_string(lines)+": Token <RPAREN> Lexeme ) found\n\n";
+    outlog<<loglist;
+    return RPAREN;
 }
 
-"{"         {
-                symbol_info *s = new symbol_info((string)yytext, "LCURL");
-                yylval = (YYSTYPE)s;
-
-                loglist = "Line no " + to_string(lines) + ": Token <LCURL> Lexeme " + yytext + " found" + "\n" + "\n";
-                outlog << loglist;
-
-                return LCURL;
+"{" {
+    loglist="Line no "+to_string(lines)+": Token <LCURL> Lexeme { found\n\n";
+    outlog<<loglist;
+    return LCURL;
 }
 
-"}"         {
-                symbol_info *s = new symbol_info((string)yytext, "RCURL");
-                yylval = (YYSTYPE)s;
-
-                loglist = "Line no " + to_string(lines) + ": Token <RCURL> Lexeme " + yytext + " found" + "\n" + "\n";
-                outlog << loglist;
-
-                return RCURL;
+"}" {
+    loglist="Line no "+to_string(lines)+": Token <RCURL> Lexeme } found\n\n";
+    outlog<<loglist;
+    return RCURL;
 }
 
-"["         {
-                symbol_info *s = new symbol_info((string)yytext, "LTHIRD");
-                yylval = (YYSTYPE)s;
-
-                loglist = "Line no " + to_string(lines) + ": Token <LTHIRD> Lexeme " + yytext + " found" + "\n" + "\n";
-                outlog << loglist;
-
-                return LTHIRD;
+"[" {
+    loglist="Line no "+to_string(lines)+": Token <LTHIRD> Lexeme [ found\n\n";
+    outlog<<loglist;
+    return LTHIRD;
 }
 
-"]"         {
-                symbol_info *s = new symbol_info((string)yytext, "RTHIRD");
-                yylval = (YYSTYPE)s;
-
-                loglist = "Line no " + to_string(lines) + ": Token <RTHIRD> Lexeme " + yytext + " found" + "\n" + "\n";
-                outlog << loglist;
-
-                return RTHIRD;
+"]" {
+    loglist="Line no "+to_string(lines)+": Token <RTHIRD> Lexeme ] found\n\n";
+    outlog<<loglist;
+    return RTHIRD;
 }
 
-","         {
-                symbol_info *s = new symbol_info((string)yytext, "COMMA");
-                yylval = (YYSTYPE)s;
-
-                loglist = "Line no " + to_string(lines) + ": Token <COMMA> Lexeme " + yytext + " found" + "\n" + "\n";
-                outlog << loglist;
-
-                return COMMA;
+"," {
+    loglist="Line no "+to_string(lines)+": Token <COMMA> Lexeme , found\n\n";
+    outlog<<loglist;
+    return COMMA;
 }
 
-":"         {
-                symbol_info *s = new symbol_info((string)yytext, "COLON");
-                yylval = (YYSTYPE)s;
-
-                loglist = "Line no " + to_string(lines) + ": Token <COLON> Lexeme " + yytext + " found" + "\n" + "\n";
-                outlog << loglist;
-
-                return COLON;
+":" {
+    loglist="Line no "+to_string(lines)+": Token <COLON> Lexeme : found\n\n";
+    outlog<<loglist;
+    return COLON;
 }
 
-";"         {
-                symbol_info *s = new symbol_info((string)yytext, "SEMICOLON");
-                yylval = (YYSTYPE)s;
-
-                loglist = "Line no " + to_string(lines) + ": Token <SEMICOLON> Lexeme " + yytext + " found" + "\n" + "\n";
-                outlog << loglist;
-
-                return SEMICOLON;
+";" {
+    loglist="Line no "+to_string(lines)+": Token <SEMICOLON> Lexeme ; found\n\n";
+    outlog<<loglist;
+    return SEMICOLON;
 }
 
 . {

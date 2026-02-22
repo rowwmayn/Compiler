@@ -1,6 +1,6 @@
 #!/bin/bash
 
-yacc -d -y --debug --verbose syntax_analyzer.y
+yacc -d -y --debug --verbose syntax_analyzer_student_version.y
 echo 'Generated the parser C file as well the header file'
 g++ -w -c -o y.o y.tab.c
 echo 'Generated the parser object file'
